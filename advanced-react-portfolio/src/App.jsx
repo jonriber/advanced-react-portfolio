@@ -1,12 +1,16 @@
 
+import { useEffect } from 'react'
 import './App.css'
 
 function App() {
 
+  useEffect(() => {
+    document.title = "Jonatas Ribeiro"
+  },[])
+
   return (
     <>
      
-      <h1>Vite + React</h1>
       
     </>
   )
