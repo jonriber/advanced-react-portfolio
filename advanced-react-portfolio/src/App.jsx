@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 // import './App.css'
 import {ChakraProvider} from "@chakra-ui/react"
-import { AlertProvider } from './context/AlertContext'
+import { AlertProvider} from "./context/alertContext"
 import Header from './components/Header'
 import LandingSection from './components/LandingSection'
 import ProjectsSection from './components/ProjectsSection'
