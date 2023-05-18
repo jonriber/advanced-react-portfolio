@@ -1,7 +1,21 @@
+import { Box, HStack } from "@chakra-ui/react"
+
 const Footer = () => {
     return(
         <>
-            <h1>Footer</h1>
+            <Box
+                position={"sticky"}
+                bottom={0}
+                left={0}
+                right={0}
+                bg={"black"}
+                color={"white"}
+            >
+                <HStack alignItems={"center"} justifyContent={"center"}>
+                    <Box>Footer</Box>
+                    
+                </HStack>
+            </Box>
         </>
     )
 }
