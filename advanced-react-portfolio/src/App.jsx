@@ -17,7 +17,6 @@ function App() {
   },[])
 
   return (
-    <>
       <ChakraProvider>
         <AlertProvider>
           <main>
@@ -31,7 +30,6 @@ function App() {
         </AlertProvider>
       </ChakraProvider>
       
-    </>
   )
 }
 
