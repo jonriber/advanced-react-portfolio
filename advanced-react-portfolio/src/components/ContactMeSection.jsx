@@ -19,6 +19,27 @@ import FullScreenSection from "./FullScreenSection"
 
 
 function ContactMeSection(){
+    const {isLoading, response, submit} = useSubmit();
+    const { onOpen } = useAlertContext();
+
+    const formik = useFormik({
+        initialValues: {
+            firstName:"",
+            email:"",
+            type:"",
+            comment:""
+        },
+        onSubmit: (values) => {
+            submit(values.firstName)
+        },
+        validationSchema: Yup.object({
+            firstName:Yup.string().label("full name").required(),
+            email: Yup.string().email().required(),
+            type: Yup.string().oneOf(["hireMe","openSource","other"]).required(),
+            comment: Yup.string().required()
+        }),
+      });
+      console.log("formik:",formik.errors, "teste:",formik.initialTouched,formik.touched.firstName)
     return(
         <>
             <FullScreenSection
@@ -27,6 +48,71 @@ function ContactMeSection(){
                 py={16}
                 spacing={8}
             >
+                <VStack w="1024px" p={32} alignItems="flex-start">
+                    <Heading as="h1" id="contact-me-section">
+                    Contact me
+                    </Heading>
+                    <Box p={6} rounded="md" w="100%">
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        formik.handleSubmit()}}>
+                        <VStack spacing={4}>
+                        <FormControl isInvalid={formik.errors.firstName && formik.touched.firstName}>
+                            <FormLabel htmlFor="firstName">Name</FormLabel>
+                            <Input
+                            id="firstName"
+                            name="firstName"
+                            value={formik.getFieldProps("firstName").value}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            />
+                            <FormErrorMessage>Required</FormErrorMessage>
+                        </FormControl>
+                        <FormControl isInvalid={formik.errors.email && formik.touched.email}>
+                            <FormLabel htmlFor="email">Email Address</FormLabel>
+                            <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formik.getFieldProps("email").value}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+
+                            />
+                            <FormErrorMessage>Required</FormErrorMessage>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor="type">Type of enquiry</FormLabel>
+                            <Select id="type" name="type" value={formik.getFieldProps("type").value}
+                            onChange={formik.handleChange}>
+                            <option value="hireMe">Freelance project proposal</option>
+                            <option value="openSource">
+                                Open source consultancy session
+                            </option>
+                            <option value="other">Other</option>
+                            </Select>
+                        </FormControl>
+                        <FormControl isInvalid={formik.errors.comment && formik.touched.comment}>
+                            <FormLabel htmlFor="comment">Your message</FormLabel>
+                            <Textarea
+                            id="comment"
+                            name="comment"
+                            placeholder='Your message'
+                            height={250}
+                            value={formik.getFieldProps("comment").value}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+
+                            />
+                            <FormErrorMessage>Required</FormErrorMessage>
+                        </FormControl>
+                        <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading} loadingText="Submitting">
+                            Submit
+                        </Button>
+                        </VStack>
+                    </form>
+                    </Box>
+                </VStack>
             </FullScreenSection>
         </>
     )
