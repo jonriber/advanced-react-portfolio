@@ -46,19 +46,16 @@ function ProjectsSection(){
                 spacing={8}
                 marginTop={"30px"}
             >   
-                <Box justifyContent={"flex-start"}>
+                <Box marginBottom={"30px"}>
                     <Heading as="h1" id="projects-section" >Featured Projects</Heading>
                 </Box>
-                <Box marginTop={"40px"}>
+                <Box>
                     <Box display={"grid"} gridTemplateColumns={"repeat(2,minmax(0,1fr))"} gridGap={8}>
                         {projectData.map((project) => (
                             <Card key={project.title} {...project}/>
                         ))}
                     </Box>
                 </Box>
-
-                
-
             </FullScreenSection>
         </>
     )
