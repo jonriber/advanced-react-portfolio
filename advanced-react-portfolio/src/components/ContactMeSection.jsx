@@ -30,16 +30,29 @@ function ContactMeSection(){
             comment:""
         },
         onSubmit: (values) => {
-            submit(values.firstName)
+            console.log("values:",values)
+            submit("",values.firstName)
         },
         validationSchema: Yup.object({
             firstName:Yup.string().label("full name").required(),
             email: Yup.string().email().required(),
-            type: Yup.string().oneOf(["hireMe","openSource","other"]).required(),
+            type: Yup.string().oneOf(["hireMe","openSource","other"]),
             comment: Yup.string().required()
         }),
       });
-      console.log("formik:",formik.errors, "teste:",formik.initialTouched,formik.touched.firstName)
+
+      useEffect(() =>{
+        if(response){
+            console.log("tenho response!",response)
+            onOpen(response.type,response.message)
+            
+        }
+        return(() => {
+            if(response && response.type ==="success") formik.resetForm()
+        })
+      },[response])
+
+    //   console.log("response",response)
     return(
         <>
             <FullScreenSection
@@ -53,9 +66,7 @@ function ContactMeSection(){
                     Contact me
                     </Heading>
                     <Box p={6} rounded="md" w="100%">
-                    <form onSubmit={(e) => {
-                        e.preventDefault()
-                        formik.handleSubmit()}}>
+                    <form onSubmit={(e) => formik.handleSubmit(e)}>
                         <VStack spacing={4}>
                         <FormControl isInvalid={formik.errors.firstName && formik.touched.firstName}>
                             <FormLabel htmlFor="firstName">Name</FormLabel>
