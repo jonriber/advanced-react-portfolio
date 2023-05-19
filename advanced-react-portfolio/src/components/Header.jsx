@@ -31,27 +31,20 @@ function Header(){
         setY(scrollY)
     }
 
-    useEffect(() => {
+    useEffect(() => { //in one useEffect i can keep track of my scroll position and update my reference with the last value
         document.addEventListener("scroll",handleScroll)
         lastYRef.current = y
-
-
         return(() => {
             document.removeEventListener("scroll",handleScroll)
         })
     },[y])
 
-    // useEffect(() => {
-    //     console.log("using ref effect")
-    //     lastYRef.current = y
-    // },[y])
 
 
     function handleClick(anchor){
         const 
             id = `${anchor}-section`,
             element = document.getElementById(id);
-        console.log("id and element:",id, element);
         if(element){
             element.scrollIntoView({
                 behavior: "smooth",
@@ -59,10 +52,7 @@ function Header(){
             });
         }
     }
-    console.log("renderizando!",y,lastYRef)
-    console.log()
     
-    console.log("scrollDown:",scrollDown)
     return(
         <Box 
             position={"sticky"}
