@@ -1,7 +1,7 @@
 import { faEnvelope} from "@fortawesome/free-solid-svg-icons"
 import { faGithub , faLinkedin, faMedium, faStackOverflow } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, HStack } from "@chakra-ui/react"
+import { Box, HStack, Link } from "@chakra-ui/react"
 import {useEffect, useRef, useState} from "react"
 
 const headerData = [
@@ -90,8 +90,11 @@ function Header(){
                     </nav>
                     <nav>
                         <HStack spacing={8}>
-                            <Box><a href="/#projects" onClick={() => handleClick("projects")}>Projects</a></Box>
-                            <Box><a href="/#contact-me" onClick={() => handleClick("contact-me")}>Contact Me</a></Box>
+                            <Box><Link  onClick={() => handleClick("projects")}>Projects</Link></Box>
+                            <Box><Link  onClick={() => handleClick("contact-me")}>Contact Me</Link></Box>
+{/* 
+                            <Box><a href="#projects" onClick={() => handleClick("projects")}>Projects</a></Box>
+                            <Box><a href="#contact-me" onClick={() => handleClick("contact-me")}>Contact Me</a></Box> */}
                         </HStack>
                     </nav>
                 </HStack>
