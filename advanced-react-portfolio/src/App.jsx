@@ -13,7 +13,7 @@ import Alert from './components/Alert'
 function App() {
 
   useEffect(() => {
-    document.title = "Pete"
+    document.title = "Pete Portfolio"
   },[])
 
   return (
