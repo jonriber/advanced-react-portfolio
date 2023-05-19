@@ -43,13 +43,11 @@ function ContactMeSection(){
 
       useEffect(() =>{
         if(response){
-            console.log("tenho response!",response)
+            if(response.type ==="success"){
+                formik.resetForm()
+            }
             onOpen(response.type,response.message)
-            
         }
-        return(() => {
-            if(response && response.type ==="success") formik.resetForm()
-        })
       },[response])
 
     //   console.log("response",response)
